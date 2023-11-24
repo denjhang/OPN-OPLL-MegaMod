@@ -1,0 +1,53 @@
+GAL16V8		;  Works with GAL16V8B and ATF16V8B
+FM_TURBO	;  chip select turbo & FM hat (Omega project)
+;1i	2i	3i	4i	5i	6i	7i	8i	9i	10
+WR	A7	A6	A5	A4	A3	A2	A1	A0	GND
+RD	M1	IORQ	F4RD	F4WR	FMCS	D4WR	FDRE	FDWE	VCC
+;11i	12i	13i	14o	15o	16o!	17o	18o	19o	20
+
+;0xF4 read
+/F4RD = /RD * A7 * A6 * A5 * A4 * /A3 * A2 * /A1 * /A0 * /IORQ * M1 
+
+;0xF4 write
+/F4WR = /WR * A7 * A6 * A5 * A4 * /A3 * A2 * /A1 * /A0 * /IORQ * M1 
+
+;FM chip select 0x7C-0x7D
+/FMCS = /A7 * A6 * A5 * A4 * A3 * A2 * /A1 * /IORQ
+
+;0xD4 FDC control port write (0xD4-0xD7)
+/D4WR =       A7 * A6 * /A5 * A4 * /A3 * A2 * /IORQ
+
+;FDC read enable (0xD0-0xD3)
+/FDRE = /RD * A7 * A6 * /A5 * A4 * /A3 * /A2 * /IORQ
+
+;FDC write enable (0xD0-0xD3)
+/FDWE = /WR * A7 * A6 * /A5 * A4 * /A3 * /A2 * /IORQ
+
+DESCRIPTION
+
+This is the I/O address decode for FM sound and microsol FDC devices MSX.
+
+Inputs:
+- /IORQ, /M1 - qualifying I/O access bus cycles
+- /WR, /RD- write & read bus cycles
+- A0, A1, A2, A3, A4, A5, A6, A7 - address lines
+
+The following functions are implemented:
+1. F4 register select
+Outputs: /F4RD, F4WR
+/F4RD is active (LOW) for I/O reading to 0xF4
+/F4WR is active (LOW) for I/O writing to 0xF4
+
+2. FM chip select
+Outputs: /FMCS
+/FMCS is active (LOW) for I/O accesses to addresses 0x7C-0x7D
+
+3. D4 register write
+Outputs: /D4WR
+/D4WR is active (LOW) for I/O writing to addresses 0xD4-0xD7
+
+4. FDC chip select
+Outputs: /FDRE, FDWE
+/FDRE is active (LOW) for I/O reading to addresses 0xD0-0xD3
+/F4WR is active (LOW) for I/O writing to addresses 0xD0-0xD3
+
