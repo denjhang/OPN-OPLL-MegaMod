@@ -12,3 +12,7 @@ OPN+OPLL MegaMod v0.3 have passed hardware testing and all functions have been v
 6. OPN and OPLL monophonic mixing circuit. Since there is no such combination of using OPN.FM+OPLL at the same time, OPN and OPLL configurable stereo make little sense. A mono mix is used here, which means the left and right channels sound the same.  
 7. Compatible with OPLL cloning chip. Just remove the pull-down resistors of the MO and RO analog audio tree pool of YM2413.  
 8. Compatible with U3567, UM3567, YM2413-F and YM2413B-F, using a simple conversion board to implement.  
+
+![image](https://github.com/denjhang/OPN-OPLL-MegaMod/blob/main/OPN%2BOPLL%20MegaMod%20v0.3/sshot-20231113-202009.png)
+![image](https://github.com/denjhang/OPN-OPLL-MegaMod/blob/main/OPN%2BOPLL%20MegaMod%20v0.3/sshot-20231113-202023.png)
+![image](https://github.com/denjhang/OPN-OPLL-MegaMod/blob/main/OPN%2BOPLL%20MegaMod%20v0.3/sshot-20231113-202037.png)
